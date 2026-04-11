@@ -55,7 +55,10 @@ function Login(){
     function handlePasswordReset(){
         const email = prompt("Please enter your email below:");
         sendPasswordResetEmail(auth, email);
-        alert("Email sent! Check your inbox for instructions about password reset.");
+        if(email.length !== 0){
+            alert("Email sent! Check your inbox for instructions about password reset.");
+        }
+        
     }
 
     return(
