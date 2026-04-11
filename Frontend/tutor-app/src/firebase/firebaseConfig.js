@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 //Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDxbB-VmIZJpmcqIWGqLXHjaq5Mw-CqGv8",
+  apiKey: "",
   authDomain: "tutor-app-44100.firebaseapp.com",
   projectId: "tutor-app-44100",
   storageBucket: "tutor-app-44100.firebasestorage.app",
