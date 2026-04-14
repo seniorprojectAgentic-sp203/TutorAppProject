@@ -1,0 +1,14 @@
+Logarithmic Derivatives Test
+
+Instructions: Answer all questions. Show all work for full credit.
+
+1.  Find the derivative of y = ln(x^2 + 1).
+2.  Differentiate f(x) = log_5(3x^2 - 2x).
+3.  Use logarithmic differentiation to find the derivative of y = x^(sin x).
+4.  Find dy/dx if y = (x^3 * e^x) / (sqrt(x^2 + 1)).
+5.  What is the derivative of y = ln(ln x)?
+6.  If f(x) = (sin x)^x, find f'(x).
+7.  Differentiate g(x) = log(base 10)((x^2 + 3x)^4).
+8.  Find the derivative of y = x^(x^x).
+9.  Given y = (tan x)^cot x, find dy/dx.
+10. If f(x) = ln |sec x + tan x|, find f'(x).
