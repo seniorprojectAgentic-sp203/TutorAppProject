@@ -19,6 +19,7 @@
     max-width: 50%;
     display: flex;
     gap: 10px;
+    
 
     &.own{
         align-self: flex-end;
@@ -48,6 +49,7 @@
             background-color: #2e303a;
             border-radius: 10px;
             color: white;
+            font-size: 18px;
         }
     }
 
