@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Login from './pages/Login';
 import { useSelector } from 'react-redux';
 import { selectUsers } from './database/userSlice';
+import SideBar from './components/SideBar';
 
 
 function App() {
@@ -15,12 +16,11 @@ function App() {
     <>
     {user.currentUser ? 
     <Router>
+      <SideBar/>
       <Routes>
-        <Route element={<Layout/>}> 
           <Route path="/" element={<HomePage/>}/>
-          <Route path="/SessionHistory" element={<SessionHistory/>}/>
-          <Route path="/NewSession" element={<NewSession/>}/>
-        </Route>
+          <Route path="/sessionhistory" element={<SessionHistory/>}/>
+          <Route path="/newsession" element={<NewSession/>}/>
       </Routes>
     </Router> 
     :
@@ -31,3 +31,9 @@ function App() {
 }
 
 export default App
+
+
+/*
+<Route element={<Layout/>}> 
+</Route>
+*/

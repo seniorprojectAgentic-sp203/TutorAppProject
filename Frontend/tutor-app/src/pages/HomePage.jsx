@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom';
+import '../styles/homepage.css';
 
 function HomePage(){
 
+    const navigate = useNavigate();
+
     return (
     <div className="home">
-        <h2>Welcome to Tutor Bot</h2>
-        <p>I am here to help with your classwork-related problems!</p>
+        <h1>Welcome to Tutor Bot</h1>
+        <p>Click the "Session History" button to view your previous tutoring sessions 
+            or start a new session by clicking the "New Tutor Session" button</p>
         <div className="home-grid">
-            <button>Session History</button>
-            <button>New Tutor Session</button>
+            <button onClick={() => navigate("/sessionhistory")}>Session History</button>
+            <button onClick={() => navigate("/newsession")}>New Tutor Session</button>
         </div>
     </div>
     );

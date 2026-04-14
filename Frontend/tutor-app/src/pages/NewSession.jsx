@@ -3,7 +3,7 @@ function NewSession(){
     
     return(
         <div>
-            <h1>New Session Page</h1>
+            <h1>New Session</h1>
         </div>
     );
 }

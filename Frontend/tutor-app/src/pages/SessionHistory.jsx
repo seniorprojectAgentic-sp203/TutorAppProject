@@ -4,7 +4,7 @@ function SessionHistory(){
 
     return(
         <div>
-            <h1>Session History Page</h1>
+            <h1>Session History </h1>
             <HistoryCard></HistoryCard>
         </div>
     );

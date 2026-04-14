@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
 import { setUser } from "../database/userSlice";
+import '../styles/sidebar.css';
 
 function SideBar(){
 
@@ -18,20 +19,25 @@ function SideBar(){
     }
 
     return  (
-    <div className= "sidebar">
-        <Link to="/">
-                <button>Home</button>
-            </Link>
-            <Link to="/SessionHistory">
-                <button>Session History</button> 
-            </Link>
-            <Link to="/NewSession">
-               <button>New Session</button>
-            </Link>
-            <Link to="/">
-                <button onClick={handleSignOut}>Logout</button>
-        </Link>
-    </div> 
+    <nav className= "sidebar">
+        <img src="/logo.png" alt="logo"></img> {/*created by Muhammad Atif*/}
+        <span className="title">Tutor Bot</span>
+        <ul>
+            <li>
+                <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+                <NavLink to="/sessionhistory">Session History</NavLink>
+            </li>
+            <li>
+                <NavLink to="/newsession">New Session</NavLink>
+            </li>
+            <li>
+                <Link to="/" onClick={handleSignOut}>Logout</Link>
+            </li>
+        </ul>
+        
+    </nav> 
     );
 }
 
