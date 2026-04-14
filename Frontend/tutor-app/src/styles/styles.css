@@ -105,22 +105,3 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-
-.login-page p.forgot-password{
-  margin-top: 8px;
-  color: rgb(0, 170, 255);
-  text-decoration: underline;
-  font-size: 8;
-  cursor: pointer;
-}
-
-.login-page div.error-msg{
-  margin-top: 8px;
-  color: red;
-  font-size: 12;
-}
-
-.login-page button.selected{
-  background:#898d95;
-  color:#f3f4f6;
-}

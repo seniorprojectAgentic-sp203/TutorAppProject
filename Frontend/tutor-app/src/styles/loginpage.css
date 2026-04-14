@@ -1,0 +1,68 @@
+.loginpage{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    img{
+        height: 200px;
+        width: 200px;
+        padding: 18px;
+        background-color: hsl(240, 51%, 35%);
+        border-radius: 5rem;
+    }
+    .selector{
+        display: flex;
+        padding: .4rem;
+    }
+    .email{
+        display: flex;
+        padding: .4rem;
+        
+        input{
+            padding: 12px;
+            font-size: 18px;
+            color: white;
+        }
+    }
+    .password{
+        display: flex;
+        padding: .4rem;
+        
+        input{
+            padding: 12px;
+            font-size: 18px;
+            color: white;
+        }
+    }
+
+    p.forgot-password{
+        margin-top: 8px;
+        color: rgb(0, 170, 255);
+        text-decoration: underline;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    div.error-msg{
+        margin-top: 8px;
+        color: red;
+        font-size: 16px;
+    }
+
+    button.selected{
+    background:#898d95;
+    color:#f3f4f6;
+    }
+
+    .loginbtn{
+        padding: 10px;
+        margin: 8px;
+    }
+    .signupbtn{
+        padding: 10px;
+        margin: 8px;
+    }
+}

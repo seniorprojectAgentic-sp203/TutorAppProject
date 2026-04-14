@@ -5,6 +5,7 @@ function SessionHistory(){
     return(
         <div>
             <h1>Session History </h1>
+            <p>[Work in Progress]</p>
             <HistoryCard></HistoryCard>
         </div>
     );

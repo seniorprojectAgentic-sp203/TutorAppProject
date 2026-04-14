@@ -3,6 +3,7 @@ import { auth } from "../firebase/firebaseConfig"
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../database/userSlice";
+import '../styles/loginpage.css';
 
 function Login(){
     const dispatch = useDispatch();
@@ -62,28 +63,27 @@ function Login(){
     }
 
     return(
-        <div className="login-page">
+        <div className="loginpage">
             <h1>Welcome to Tutor Bot</h1>
+            <img src="logo.png" alt="logo" />
             <p>Login or create an account to continue</p>
             
-            <div>
+            <div className="selector">
                 <button className={`btn ${loginType == 'login' ? 'selected' : ''}`} onClick={() => setLoginType("login")}>Login</button>
                 <button className={`btn ${loginType == 'signup' ? 'selected' : ''}`} onClick={() => setLoginType("signup")}>Signup</button>
             </div>
             <form>
-                <div>
-                    <label>Email: </label>
-                    <input type="text" name="email" placeholder="Enter your email" onChange={(e) => {handleCredentials(e)}}></input>
+                <div className="email">
+                    <input type="text" name="email" placeholder="Email" onChange={(e) => {handleCredentials(e)}}></input>
                 </div>
-                <div>
-                    <label>Password: </label>
-                    <input type="password" name="password" placeholder="Enter your password" onChange={(e) => {handleCredentials(e)}}></input>
+                <div className="password">
+                    <input type="password" name="password" placeholder="Password" onChange={(e) => {handleCredentials(e)}}></input>
                 </div>
                 {
                     loginType == 'login' ?
-                    <button onClick={(e)=> {handleLogin(e)}}>Login</button>
+                    <button className="loginbtn" onClick={(e)=> {handleLogin(e)}}>Login</button>
                     :
-                    <button onClick={(e) => {handleSignup(e)}}>Signup</button>
+                    <button className="signupbtn" onClick={(e) => {handleSignup(e)}}>Signup</button>
                 }
                 {
                     error && <div className="error-msg">{error}</div>
