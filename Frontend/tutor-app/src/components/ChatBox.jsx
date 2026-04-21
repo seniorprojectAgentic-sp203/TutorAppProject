@@ -14,16 +14,16 @@ function ChatBox(){
     return (
        <div className="chatbox">
           <div className="chatarea">
+                 <div className="message">
+                    <img src="logo.png" alt="tutor" />
+                    <div className="text">
+                        <p>Response</p>
+                    </div>
+                </div>
                 <div className="message own">
                     <img src="user.png" alt="user" />
                     <div className="text">
                         <p>Message</p>
-                    </div>
-                </div>
-                <div className="message">
-                    <img src="logo.png" alt="user" />
-                    <div className="text">
-                        <p>Response</p>
                     </div>
                 </div>
           </div>
@@ -33,7 +33,6 @@ function ChatBox(){
             </div>
             <input className="userinput" onChange={(e) => setText(e.target.value)}
              type="text" placeholder="Type a message..."/>
-            
             <div>
                 <button>Send</button>
             </div>
