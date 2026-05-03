@@ -1,9 +1,9 @@
 
-function HistoryCard(prop){
+function HistoryCard(){
 
     return (
        <div className="historycard">
-          <image></image>
+            <img></img>
             <h2></h2>
             <p></p>
        </div>

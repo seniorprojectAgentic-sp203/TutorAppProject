@@ -1,12 +1,16 @@
+
 div .home{
     display: grid;
     justify-content: center;
+    margin-left: 20vh;
+    margin-right: 20vh;
+    gap: 8px;
 }
 
 div p{
-   margin: .5rem;
+   margin: .6rem;
    font-size: 1.2rem;
-    padding: .5rem;
+   
 }
 
 div button{

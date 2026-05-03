@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { auth } from "../firebase/firebaseConfig"
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { setUser } from "../database/userSlice";
+import { useEffect, useState } from "react";
+import { auth, db } from "../firebase/firebaseConfig"
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUsers, setUser } from "../database/userSlice";
 import LoadingPage from "./LoadingPage";
 import '../styles/loginpage.css';
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 function Login() {
     const dispatch = useDispatch();
@@ -12,19 +13,25 @@ function Login() {
     const [loginType, setLoginType] = useState('login');
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState("");
+    
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            dispatch(setUser({ id: user.uid, email: user.email }));
-        }
-        else {
-            dispatch(setUser(null));
-        }
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const username = user.email?.split("@")[0];
+                dispatch(setUser({ id: user.uid, email: user.email, username: username }));
+            }
+            else {
+                dispatch(setUser(null));
+            }
 
-        if (isLoading == true) {
-            setIsLoading(false);
-        }
-    });
+            if (isLoading == true) {
+                setIsLoading(false);
+            }
+        });
+        return unsubscribe;
+    }, []);
+
 
     function handleCredentials(e) {
         setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -35,14 +42,41 @@ function Login() {
         setError("");
 
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
-            .then((userCredential) => {
+            .then(async (userCredential) => {
                 //Signed in
                 const user = userCredential.user;
-
+                alert("Account created! You are now logged in.");
+                await handleDatabase();
             })
             .catch((error) => {
                 setError(error.message);
             });
+    }
+
+
+    async function handleDatabase() {
+        const user = auth.currentUser;
+
+        if (!user) {
+            console.error("Error: No User");
+            return;
+        }
+
+        const username = user.email?.split("@")[0];
+
+        try {
+            await setDoc(doc(db, 'users', user.uid), {
+                id: user.uid,
+                email: user.email,
+                username: username,
+                createdAt: serverTimestamp(),
+            });
+
+            console.log("User and Messages created");
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 
     function handleLogin(e) {
@@ -80,7 +114,7 @@ function Login() {
                     <button className={`btn ${loginType == 'login' ? 'selected' : ''}`} onClick={() => setLoginType("login")}>Login</button>
                     <button className={`btn ${loginType == 'signup' ? 'selected' : ''}`} onClick={() => setLoginType("signup")}>Signup</button>
                 </div>
-                <form onSubmit={(e) => {e.preventDefault; handleCredentials}}>
+                <form onSubmit={(e) => { e.preventDefault; handleCredentials }}>
                     <div className="email">
                         <input type="text" name="email" placeholder="Email" onChange={(e) => { handleCredentials(e) }}></input>
                     </div>
@@ -88,10 +122,10 @@ function Login() {
                         <input type="password" name="password" placeholder="Password" onChange={(e) => { handleCredentials(e) }}></input>
                     </div>
                     {
-                    loginType == 'login' ?
-                        <button type="submit" className="loginbtn" onClick={(e) => { handleLogin(e) }}>Login</button>
-                        :
-                        <button type="submit" className="signupbtn" onClick={(e) => { handleSignup(e) }}>Signup</button>
+                        loginType == 'login' ?
+                            <button type="submit" className="loginbtn" onClick={(e) => { handleLogin(e) }}>Login</button>
+                            :
+                            <button type="submit" className="signupbtn" onClick={(e) => { handleSignup(e) }}>Signup</button>
                     }
                 </form>
                 {
