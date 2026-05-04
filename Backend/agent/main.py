@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from google.cloud import firestore
-from agent import code_parallel_agent
+from agent import code_research_agent
 import datetime
 
 app = FastAPI()
@@ -12,7 +12,7 @@ async def run_agent(payload: dict):
     session_id = payload["sessionId"]
     user_message = payload["message"]
 
-    result = code_parallel_agent.invoke(user_message)
+    result = code_research_agent.run(user_message)
     response = str(result)
     timestamp = datetime.datetime.now()
     timestamp = timestamp.strftime("%a" + ", %d " + "%B" + " %Y " + "%X " + "%p " +"UTC %z")
