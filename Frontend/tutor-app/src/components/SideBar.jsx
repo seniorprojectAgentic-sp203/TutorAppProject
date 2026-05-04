@@ -35,7 +35,7 @@ function SideBar() {
                         text: "Hello, how can I help you today?",
                         createdAt: timestamp.toUTCString(),
                         senderId: tutorId,
-                        role: "user",
+                        role: "tutor",
                     }),
                     initialSessionDate: serverTimestamp(),
                 });
