@@ -47,6 +47,7 @@ function ChatBox() {
                     text: message,
                     createdAt: timestamp.toUTCString(),
                     senderId: user.currentUser.id,
+                    role: "user",
                 })
             });
 

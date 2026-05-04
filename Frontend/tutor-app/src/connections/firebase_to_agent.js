@@ -4,20 +4,20 @@ import fetch from 'node-fetch';
 export const messageChange = functions.firestore
         .document("sessions/{sessionId}")
         .onUpdate(async(change, context) => {
-            const start = change.start.data();
-            const end = change.end.data();
+            const before = change.before.data();
+            const after = change.after.data();
 
-            if(!end.messages || end.messages.length <= start.messages.length){
+            if(!after.messages || after.messages.length <= before.messages.length){
                 return null;
             }
 
-            const lastMessage = end.messages.at(-1);
+            const lastMessage = after.messages.at(-1);
 
-            if(lastMessage.senderId !== user.currentUser.id ){
+            if(lastMessage.role !== "user"){
                 return null;
             }
 
-            await fetch("https:// /run",{
+            await fetch("https://tutorapp-287595569448.us-central1.run.app/run",{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
