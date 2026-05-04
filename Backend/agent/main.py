@@ -1,23 +1,28 @@
 from fastapi import FastAPI
 from google.cloud import firestore
-from agent import code_research_agent
+from google.adk.runners import LocalRunner
+from agent import root_agent
 import datetime
 
 app = FastAPI()
 db = firestore.Client()
 tutorId = "tutor-bot"
 
+runner = LocalRunner(root_agent)
+
 @app.post("/run")
 async def run_agent(payload: dict):
     session_id = payload["sessionId"]
     user_message = payload["message"]
 
-    result = code_research_agent.invoke(user_message)
+    result = runner.run(input=user_message)
 
-    if isinstance(result, str):
-        response = result
-    elif isinstance(result, dict):
-        response = result.get("content") or result.get("final") or str(result)
+    if isinstance(result, dict):
+       response = (
+           result.get("research_output")
+           or result.get("file_output")
+           or str(result)
+       )
     else:
         response = str(result)
 
