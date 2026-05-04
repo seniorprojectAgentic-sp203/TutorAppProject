@@ -17,13 +17,24 @@ export const messageChange = functions.firestore
                 return null;
             }
 
-            await fetch("https://tutorapp-287595569448.us-central1.run.app/run",{
+            const response = await fetch("https://tutorapp-287595569448.us-central1.run.app/run",{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    sessionId: context.params.sessionId,
-                    message: lastMessage.text
-                })
+                    input: lastMessage.text
+                }),
             });
+            
+            const result = await response.json();
+
+            await change.after.ref.update({
+                messages: functions.firestore.FieldValue.arrayUnion({
+                    text: result.output ?? JSON.stringify(result),
+                    role: "tutor",
+                    senderId: "tutor-bot",
+                    createdAt: new Date().toUTCString(),
+                }),
+            });
+
             return null;
         });
