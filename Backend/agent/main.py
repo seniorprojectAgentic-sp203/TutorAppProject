@@ -12,8 +12,15 @@ async def run_agent(payload: dict):
     session_id = payload["sessionId"]
     user_message = payload["message"]
 
-    result = code_research_agent(user_message)
-    response = str(result)
+    result = code_research_agent.invoke(user_message)
+
+    if isinstance(result, str):
+        response = result
+    elif isinstance(result, dict):
+        response = result.get("content") or result.get("final") or str(result)
+    else:
+        response = str(result)
+
     timestamp = datetime.datetime.now()
     timestamp = timestamp.strftime("%a" + ", %d " + "%B" + " %Y " + "%X " + "%p " +"UTC %z")
 
@@ -26,4 +33,4 @@ async def run_agent(payload: dict):
         }])
     })
 
-    return {"status": "success"}
+    return {"status": "ok"}
