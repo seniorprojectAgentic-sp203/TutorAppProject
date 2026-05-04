@@ -12,7 +12,8 @@ async def run_agent(payload: dict):
     session_id = payload["sessionId"]
     user_message = payload["message"]
 
-    response = code_parallel_agent.run(user_message)
+    result = code_parallel_agent.invoke(user_message)
+    response = str(result)
     timestamp = datetime.datetime.now()
     timestamp = timestamp.strftime("%a" + ", %d " + "%B" + " %Y " + "%X " + "%p " +"UTC %z")
 
